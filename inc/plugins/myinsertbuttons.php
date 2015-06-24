@@ -19,7 +19,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('MIB_PLUGIN_VER', '1.0.1');
+define('MIB_PLUGIN_VER', '2.0.0');
 
 function myinsertbuttons_info()
 {
@@ -59,8 +59,18 @@ function myinsertbuttons_install()
 		'title'		=> $lang->myinsertbuttons_rules_title,
 		'description'	=> $lang->myinsertbuttons_rules_desc,
 		'optionscode'	=> 'textarea',
+		'value'		=> 'imgur,',
+		'disporder'	=> 1,
+		'gid'		=> $groupid
+	));
+	
+	$db->insert_query('settings', array(
+		'name'		=> 'myinsertbuttons_imgurapi',
+		'title'		=> $lang->myinsertbuttons_imgur_title,
+		'description'	=> $lang->myinsertbuttons_imgur_desc,
+		'optionscode'	=> 'text',
 		'value'		=> '',
-		'disporder'	=> '1',
+		'disporder'	=> 2,
 		'gid'		=> $groupid
 	));
 
@@ -102,7 +112,8 @@ function myinsertbuttons_activate()
 		'codebuttons',
 		'#' . preg_quote('<script type="text/javascript">') . '#i',
 		"<script type=\"text/javascript\">
-var newbutbar = '';
+var newbutbar = '',
+	iclid = '{\$mybb->settings['myinsertbuttons_imgurapi']}';
 if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 	newbut = '{\$mybb->settings['myinsertbuttons_rules']}';
 	newbutbar = ''+newbut+'|';
@@ -132,7 +143,8 @@ if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 			'codebutquick',
 			'#' . preg_quote('<script type="text/javascript">') . '#i',
 			"<script type=\"text/javascript\">
-var newbutbar = '';
+var newbutbar = '',
+	iclid = '{\$mybb->settings['myinsertbuttons_imgurapi']}';
 if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 	newbut = '{\$mybb->settings['myinsertbuttons_rules']}';
 	newbutbar = ''+newbut+'|';
@@ -161,7 +173,8 @@ if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 			'codebutquick_pm',
 			'#' . preg_quote('<script type="text/javascript">') . '#i',
 			"<script type=\"text/javascript\">
-var newbutbar = '';
+var newbutbar = '',
+	iclid = '{\$mybb->settings['myinsertbuttons_imgurapi']}';
 if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 	newbut = '{\$mybb->settings['myinsertbuttons_rules']}';
 	newbutbar = ''+newbut+'|';
@@ -196,7 +209,8 @@ function myinsertbuttons_deactivate()
 	find_replace_templatesets(
 		'codebuttons',
 		'#' . preg_quote("<script type=\"text/javascript\">
-var newbutbar = '';
+var newbutbar = '',
+	iclid = '{\$mybb->settings['myinsertbuttons_imgurapi']}';
 if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 	newbut = '{\$mybb->settings['myinsertbuttons_rules']}';
 	newbutbar = ''+newbut+'|';
@@ -226,7 +240,8 @@ if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 		find_replace_templatesets(
 			'codebutquick',
 			'#' . preg_quote("<script type=\"text/javascript\">
-var newbutbar = '';
+var newbutbar = '',
+	iclid = '{\$mybb->settings['myinsertbuttons_imgurapi']}';
 if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 	newbut = '{\$mybb->settings['myinsertbuttons_rules']}';
 	newbutbar = ''+newbut+'|';
@@ -255,7 +270,8 @@ if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 		find_replace_templatesets(
 			'codebutquick_pm',
 			'#' . preg_quote("<script type=\"text/javascript\">
-var newbutbar = '';
+var newbutbar = '',
+	iclid = '{\$mybb->settings['myinsertbuttons_imgurapi']}';
 if (!'{\$mybb->settings['myinsertbuttons_rules']}'.trim() == ''){
 	newbut = '{\$mybb->settings['myinsertbuttons_rules']}';
 	newbutbar = ''+newbut+'|';
