@@ -1,4 +1,5 @@
 function mibimage(but_name) {
+	button = '';
 	if (but_name=='imgur') {
 		if (iclid.trim()!='') {
 			button = '<style type="text/css">'+
@@ -21,32 +22,80 @@ function mibimage(but_name) {
 	return button;
 }
 
-function mibutton(but_name) {
+function mibutton(but_name,type) {
 	if (but_name=='imgur') {
 		if (iclid.trim()!='') {
 			$.sceditor.command.set("imgur", {
-				exec: function () 
-				{
+				_imgur: function() {
 					document.querySelector('textarea').insertAdjacentHTML( 'afterEnd', '<input class="imgur" style="visibility:hidden;position:absolute;top:0;" type="file" onchange="upload(this.files[0])" accept="image/*">' );
-					document.querySelector('input.imgur').click();
+					document.querySelector('input.imgur').click();				
+				},
+				exec: function ()
+				{
+					$.sceditor.command.get("imgur")._imgur();
 				},
 				txtExec: function() 
 				{
-					document.querySelector('textarea').insertAdjacentHTML( 'afterEnd', '<input class="imgur" style="visibility:hidden;position:absolute;top:0;" type="file" onchange="upload(this.files[0])" accept="image/*">' );
-					document.querySelector('input.imgur').click();
+					$.sceditor.command.get("imgur")._imgur();
 				},
 				tooltip: 'Upload to Imgur'
 			});
 		}
 	}
 	else {
-		$.sceditor.command.set(''+but_name+'', {
-			exec: function () {
-				this.insert('['+but_name+']', '[/'+but_name+']');
-			},
-			txtExec: ['['+but_name+']', '[/'+but_name+']'],
-			tooltip: 'Insert a '+but_name+''
-		});
+		if (!type) {
+			$.sceditor.command.set(''+but_name+'', {
+				exec: function () {
+					this.insert('['+but_name+']', '[/'+but_name+']');
+				},
+				txtExec: ['['+but_name+']', '[/'+but_name+']'],
+				tooltip: 'Insert a '+but_name+''
+			});
+		}
+		else {
+			$.sceditor.command.set(''+but_name+'', {
+				_dropDown: function (editor, caller, html) {
+					var content, description;
+
+					content = $(
+						'<div>' +
+							'<label for="des">' + editor._('Description (optional):') + '</label> ' +
+							'<input type="text" id="des" />' +
+						'</div>' +
+						'<div><input type="button" class="button" value="' + editor._('Insert') + '" /></div>'
+					);
+
+					content.find('.button').click(function (e) {
+						description = content.find('#des').val();
+						before = '[' + but_name + ']';
+						end = '[/' + but_name + ']';
+
+						if (description) {
+							descriptionAttr = '=' + description + '';
+							before = '[' + but_name + ''+ descriptionAttr +']';
+						}
+
+						if (html) {
+							before = before + html + end;
+							end	   = null;
+						}
+
+						editor.insert(before, end);
+						editor.closeDropDown(true);
+						e.preventDefault();
+					});
+
+					editor.createDropDown(caller, 'insert'+but_name+'', content);
+				},
+				exec: function (caller) {
+					$.sceditor.command.get(''+but_name+'')._dropDown(this, caller);
+				},
+				txtExec: function (caller) {
+					$.sceditor.command.get(''+but_name+'')._dropDown(this, caller);
+				},
+				tooltip: 'Insert a '+but_name+''
+			});		
+		}
 	}
 }
 
