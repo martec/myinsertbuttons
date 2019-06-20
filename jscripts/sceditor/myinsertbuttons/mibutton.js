@@ -55,18 +55,20 @@ function mibutton(but_name,type) {
 		else {
 			$.sceditor.command.set(''+but_name+'', {
 				_dropDown: function (editor, caller, html) {
-					var content, description;
+					var $content, description;
 
-					content = $(
+					$content = $(
 						'<div>' +
-							'<label for="des">' + editor._('Description (optional):') + '</label> ' +
-							'<input type="text" id="des" />' +
+						'<div>' +
+						'<label for="des">' + editor._('Description (optional):') + '</label> ' +
+						'<input type="text" id="des" />' +
 						'</div>' +
-						'<div><input type="button" class="button" value="' + editor._('Insert') + '" /></div>'
+						'<div><input type="button" class="button" value="' + editor._('Insert') + '" /></div>' +
+						'<div>'
 					);
 
-					content.find('.button').click(function (e) {
-						description = content.find('#des').val();
+					$content.find('.button').click(function (e) {
+						description = $content.find('#des').val();
 						before = '[' + but_name + ']';
 						end = '[/' + but_name + ']';
 
@@ -85,7 +87,7 @@ function mibutton(but_name,type) {
 						e.preventDefault();
 					});
 
-					editor.createDropDown(caller, 'insert'+but_name+'', content);
+					editor.createDropDown(caller, 'insert'+but_name+'', $content.get(0));
 				},
 				exec: function (caller) {
 					$.sceditor.command.get(''+but_name+'')._dropDown(this, caller);
@@ -119,7 +121,7 @@ function upload(file) {
 	xhr.open("POST", "https://api.imgur.com/3/image.json"); // Boooom!
 	xhr.onload = function() {
 		var code = '[img]' + JSON.parse(xhr.responseText).data.link + '[/img]';
-		$('#message, #signature, textarea[name*="value"]').data('sceditor').insert(code);
+		$('#message, #signature, textarea[name*="value"]').sceditor("instance").insert(code);
 		var d = document.querySelector(".sceditor-button-imgur div.imgurup");
 		d.className = d.className - " imgurup";
 		document.querySelector('input.imgur').remove();

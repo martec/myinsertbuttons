@@ -19,7 +19,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('MIB_PLUGIN_VER', '3.0.0');
+define('MIB_PLUGIN_VER', '4.0.0');
 
 function myinsertbuttons_info()
 {
@@ -113,8 +113,8 @@ function myinsertbuttons_activate()
 
 	find_replace_templatesets(
 		'codebuttons',
-		'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />') . '#i',
-		'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
+		'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />') . '#i',
+		'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
 <script type="text/javascript" src="{$mybb->asset_url}/jscripts/sceditor/myinsertbuttons/mibutton.js?ver='.MIB_PLUGIN_VER.'"></script>'
 	);
 
@@ -153,8 +153,8 @@ if (!'{\$mybb->settings['myinsertbuttons_rules_des']}'.trim() == ''){
 	if ($plugins_cache['active']['quickadveditorplus'] or $plugins_cache['active']['quickadveditor']) {
 		find_replace_templatesets(
 			'codebutquick',
-			'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />') . '#i',
-			'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
+			'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />') . '#i',
+			'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
 <script type="text/javascript" src="{$mybb->asset_url}/jscripts/sceditor/myinsertbuttons/mibutton.js?ver='.MIB_PLUGIN_VER.'"></script>'
 		);
 
@@ -192,8 +192,8 @@ if (!'{\$mybb->settings['myinsertbuttons_rules_des']}'.trim() == ''){
 
 		find_replace_templatesets(
 			'codebutquick_pm',
-			'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />') . '#i',
-			'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
+			'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />') . '#i',
+			'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
 <script type="text/javascript" src="{$mybb->asset_url}/jscripts/sceditor/myinsertbuttons/mibutton.js?ver='.MIB_PLUGIN_VER.'"></script>'
 		);
 
@@ -238,9 +238,9 @@ function myinsertbuttons_deactivate()
 
 	find_replace_templatesets(
 		'codebuttons',
-		'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
+		'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
 <script type="text/javascript" src="{$mybb->asset_url}/jscripts/sceditor/myinsertbuttons/mibutton.js?ver='.MIB_PLUGIN_VER.'"></script>') . '#i',
-		'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />'
+		'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />'
 	);
 
 	find_replace_templatesets(
@@ -278,9 +278,9 @@ if (!'{\$mybb->settings['myinsertbuttons_rules_des']}'.trim() == ''){
 	if ($plugins_cache['active']['quickadveditorplus'] or $plugins_cache['active']['quickadveditor']) {
 		find_replace_templatesets(
 			'codebutquick',
-			'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
+			'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
 <script type="text/javascript" src="{$mybb->asset_url}/jscripts/sceditor/myinsertbuttons/mibutton.js?ver='.MIB_PLUGIN_VER.'"></script>') . '#i',
-			'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />'
+			'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />'
 		);
 
 		find_replace_templatesets(
@@ -317,9 +317,9 @@ if (!'{\$mybb->settings['myinsertbuttons_rules_des']}'.trim() == ''){
 
 		find_replace_templatesets(
 			'codebutquick_pm',
-			'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
+			'#' . preg_quote('<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />
 <script type="text/javascript" src="{$mybb->asset_url}/jscripts/sceditor/myinsertbuttons/mibutton.js?ver='.MIB_PLUGIN_VER.'"></script>') . '#i',
-			'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/editor_themes/{$theme[\'editortheme\']}" type="text/css" media="all" />'
+			'<link rel="stylesheet" href="{$mybb->asset_url}/jscripts/sceditor/themes/{$theme[\'editortheme\']}" type="text/css" media="all" />'
 		);
 
 		find_replace_templatesets(
