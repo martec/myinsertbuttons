@@ -19,7 +19,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('MIB_PLUGIN_VER', '4.0.0');
+define('MIB_PLUGIN_VER', '4.0.1');
 
 function myinsertbuttons_info()
 {
@@ -43,8 +43,8 @@ function myinsertbuttons_install()
 
 	$lang->load('config_myinsertbuttons');
 
-	$query	= $db->simple_select("settinggroups", "COUNT(*) as rows");
-	$dorder = $db->fetch_field($query, 'rows') + 1;
+	$query	= $db->simple_select("settinggroups", "COUNT(*) as rows_n");
+	$dorder = $db->fetch_field($query, 'rows_n') + 1;
 
 	$groupid = $db->insert_query('settinggroups', array(
 		'name'		=> 'myinsertbuttons',
@@ -91,8 +91,8 @@ function myinsertbuttons_is_installed()
 {
 	global $db;
 
-	$query = $db->simple_select("settinggroups", "COUNT(*) as rows", "name = 'myinsertbuttons'");
-	$rows  = $db->fetch_field($query, 'rows');
+	$query = $db->simple_select("settinggroups", "COUNT(*) as rows_n", "name = 'myinsertbuttons'");
+	$rows  = $db->fetch_field($query, 'rows_n');
 
 	return ($rows > 0);
 }
