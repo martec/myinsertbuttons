@@ -82,7 +82,7 @@ function mibutton(but_name,type) {
 							end	   = null;
 						}
 
-						editor.insert(before, end);
+						editor.insertText(before, end);
 						editor.closeDropDown(true);
 						e.preventDefault();
 					});
